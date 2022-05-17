@@ -5,7 +5,7 @@ import java.util.Date;
 public class Empregado {
     private Integer codigo;
     private String nome;
-    private Date dataCntrato;
+    private Date dataContrato;
     private String rg;
 
     public Empregado() {
@@ -14,7 +14,7 @@ public class Empregado {
     public Empregado(Integer codigo, String nome, Date data_contrato, String rg) {
         this.codigo = codigo;
         this.nome = nome;
-        this.dataCntrato = data_contrato;
+        this.dataContrato = data_contrato;
         this.rg = rg;
     }
 
@@ -34,12 +34,12 @@ public class Empregado {
         this.nome = nome;
     }
 
-    public Date getDataCntrato() {
-        return dataCntrato;
+    public Date getDataContrato() {
+        return dataContrato;
     }
 
-    public void setDataCntrato(Date dataCntrato) {
-        this.dataCntrato = dataCntrato;
+    public void setDataContrato(Date dataContrato) {
+        this.dataContrato = dataContrato;
     }
 
     public String getRg() {

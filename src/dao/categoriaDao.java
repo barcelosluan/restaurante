@@ -42,7 +42,7 @@ public class categoriaDao {
             ResultSet rs = ppst.executeQuery();
 
             while(rs.next()){
-               Integer cod = Integer.valueOf(rs.getString("codigo"));
+               Integer cod = rs.getInt("codigo");
                String des = rs.getString("descricao");
 
                categorias.add(new Categoria(cod, des));
