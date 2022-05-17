@@ -1,7 +1,7 @@
 package dao;
 
 import dao.connector.Connector;
-import model.Categoria;
+import model.Ingrediente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,18 +9,18 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class categoriaDao {
+public class IngredienteDao {
     Connector connector;
 
-    public void insertCategoria(Categoria categoria){
-        String query = "insert into categorias (codigo, descricao) values (?,?);";
+    public void insertIngrediente(Ingrediente Ingrediente){
+        String query = "insert into ingredientes (nome, descricao) values (?,?);";
         try {
             Connection con = connector.connectar();
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(categoria.getCodigo()));
-            ppst.setString(2, categoria.getDescricao());
+            ppst.setString(1, String.valueOf(Ingrediente.getNome()));
+            ppst.setString(2, Ingrediente.getDescricao());
 
             ppst.executeQuery();
 
@@ -31,9 +31,9 @@ public class categoriaDao {
 
     }
 
-    public List<Categoria> getAllCategorias(){
-        List<Categoria> categorias = new ArrayList<>();
-        String query = "select * from categorias;";
+    public List<Ingrediente> getAllingredientes(){
+        List<Ingrediente> ingredientes = new ArrayList<>();
+        String query = "select * from ingredientes;";
         try {
             Connection con = connector.connectar();
 
@@ -42,21 +42,21 @@ public class categoriaDao {
             ResultSet rs = ppst.executeQuery();
 
             while(rs.next()){
-               Integer cod = Integer.valueOf(rs.getString("codigo"));
-               String des = rs.getString("descricao");
+                String nome = rs.getString("nome");
+                String des = rs.getString("descricao");
 
-               categorias.add(new Categoria(cod, des));
+                ingredientes.add(new Ingrediente(nome, des));
             }
             con.close();
-            return categorias;
+            return ingredientes;
         }catch (Exception e){
             System.out.println(e.getMessage());
             return null;
         }
     }
 
-    public Categoria getCategoriaByID(Integer codigo){
-        String query = "select * from categorias c where c.codigo = ?;";
+    public Ingrediente getIngredienteByID(String codigo){
+        String query = "select * from ingredientes i where i.nome = ?;";
         try {
             Connection con = connector.connectar();
 
@@ -66,10 +66,10 @@ public class categoriaDao {
 
             ResultSet rs = ppst.executeQuery();
 
-            String cod = rs.getString("codigo");
+            String nome = rs.getString("nome");
             String desc = rs.getString("descricao");
 
-            return new Categoria(Integer.valueOf(cod), desc);
+            return new Ingrediente(nome, desc);
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -77,8 +77,8 @@ public class categoriaDao {
         }
     }
 
-    public Categoria updateCategria(Integer codigo, String novDes){
-        String query = "update categorias set descricao = ? where codigo = ?;";
+    public Ingrediente updateCategria(String nome, String novDes){
+        String query = "update ingredientes set descricao = ? where nome = ?;";
         try {
             Connection con = connector.connectar();
 
@@ -86,22 +86,22 @@ public class categoriaDao {
 
             ppst.setString(1,novDes);
 
-            ppst.setString(2, String.valueOf(codigo));
+            ppst.setString(2, nome);
 
             ppst.executeQuery();
 
             con.close();
 
-            return getCategoriaByID(codigo);
+            return getIngredienteByID(nome);
         }catch (Exception e){
             System.out.println(e.getMessage());
             return null;
         }
     }
 
-    public void deleteCategoria(Integer codigo){
-        String query = "delete from categorias where codigo = ?;";
-        try {
+    public void deleteIngrediente(Integer codigo){
+        String query = "delete from ingredientes where nome = ?;";
+        try{
             Connection con = connector.connectar();
 
             PreparedStatement ppst = con.prepareStatement(query);
@@ -116,5 +116,5 @@ public class categoriaDao {
         }
 
     }
-
+    
 }

@@ -1,7 +1,6 @@
 package model;
 
 public class Ingrediente {
-    private Integer codIgrediente;
     private String nome;
     private String descricao;
 
@@ -21,8 +20,7 @@ public class Ingrediente {
         this.descricao = descricao;
     }
 
-    public Ingrediente(Integer codIgrediente, String nome, String descricao) {
-        this.codIgrediente = codIgrediente;
+    public Ingrediente(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
