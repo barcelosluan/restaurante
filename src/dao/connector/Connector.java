@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Connector {
 
-    public Connection connector(){
+    public Connection connectar(){
         Connection conn = null;
         try{
             String url = "jdbc:postgresql://localhost:5432/postgres";
