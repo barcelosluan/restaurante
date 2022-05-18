@@ -1,26 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.Principal">
-  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
-    <border type="none"/>
+    <properties>
+      <maximumSize width="290" height="200"/>
+    </properties>
+    <border type="none" title="Tela Principal"/>
     <children>
-      <component id="92de3" class="javax.swing.JButton" binding="btn_app">
+      <component id="4a83f" class="javax.swing.JButton" binding="btn_Livro">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Livros"/>
         </properties>
       </component>
-      <hspacer id="59924">
+      <component id="efee" class="javax.swing.JButton" binding="receitasButton" default-binding="true">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-      </hspacer>
+        <properties>
+          <text value="Receitas"/>
+        </properties>
+      </component>
+      <component id="68e1f" class="javax.swing.JButton" binding="ingredienteButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Ingrediente"/>
+        </properties>
+      </component>
+      <component id="ed1fb" class="javax.swing.JButton" binding="empregadoButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Empregado"/>
+        </properties>
+      </component>
+      <component id="2d547" class="javax.swing.JButton" binding="restauranteButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Restaurante"/>
+        </properties>
+      </component>
+      <component id="525cc" class="javax.swing.JLabel" binding="lblLivro">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Fira Code" size="12"/>
+          <horizontalAlignment value="10"/>
+          <text value="Cadastro de Livros"/>
+        </properties>
+      </component>
+      <component id="af3c0" class="javax.swing.JLabel" binding="lblReceitas">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Fira Code" size="12"/>
+          <text value="Cadastro de Receitas"/>
+        </properties>
+      </component>
+      <component id="a5a0" class="javax.swing.JLabel" binding="lblIngrediente">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Fira Code" size="12"/>
+          <text value="Castro de Ingredientes"/>
+        </properties>
+      </component>
+      <component id="c872b" class="javax.swing.JLabel" binding="lblEmpregado">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Fira Code" size="12"/>
+          <text value="Cadastro de Empregados"/>
+        </properties>
+      </component>
+      <component id="40eb6" class="javax.swing.JLabel" binding="lblRestaurante">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Fira Code" size="12"/>
+          <text value="Cadastro de Restaurantes"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
