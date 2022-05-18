@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class categoriaDao {
-    Connector connector;
+    Connector connector = new Connector();
 
     public void insertCategoria(Categoria categoria){
         String query = "insert into categorias (codigo, descricao) values (?,?);";
@@ -19,7 +19,7 @@ public class categoriaDao {
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(categoria.getCodigo()));
+            ppst.setInt(1, categoria.getCodigo());
             ppst.setString(2, categoria.getDescricao());
 
             ppst.executeQuery();
@@ -62,7 +62,7 @@ public class categoriaDao {
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(codigo));
+            ppst.setInt(1, codigo);
 
             ResultSet rs = ppst.executeQuery();
 
@@ -86,7 +86,7 @@ public class categoriaDao {
 
             ppst.setString(1,novDes);
 
-            ppst.setString(2, String.valueOf(codigo));
+            ppst.setInt(2, codigo);
 
             ppst.executeQuery();
 
@@ -106,7 +106,7 @@ public class categoriaDao {
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(codigo));
+            ppst.setInt(1, codigo);
 
             ppst.executeQuery();
 

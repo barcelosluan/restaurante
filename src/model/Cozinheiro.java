@@ -8,15 +8,20 @@ public class Cozinheiro extends Empregado{
 
     private String fantasia;
 
-    private List<Restaurante> restaurantes;
 
     public Cozinheiro() {
     }
 
-    public Cozinheiro(Integer codigo, String nome, Date data_contrato, String rg, String fantasia, List<Restaurante> restaurantes) {
+    public Cozinheiro(Integer codigo, String nome, Date data_contrato, String rg, String fantasia) {
         super(codigo, nome, data_contrato, rg);
+        this.codEmpregado=codigo;
         this.fantasia=fantasia;
-        this.restaurantes = restaurantes;
+    }
+
+    public Cozinheiro(Integer codEmpregado, String fantasia) {
+        super();
+        this.codEmpregado=codEmpregado;
+        this.fantasia=fantasia;
     }
 
     public Integer getCodEmpregado() {
@@ -29,14 +34,6 @@ public class Cozinheiro extends Empregado{
 
     public String getFantasia() {
         return fantasia;
-    }
-
-    public List<Restaurante> getRestaurantes() {
-        return restaurantes;
-    }
-
-    public void setRestaurantes(Restaurante restaurante) {
-        this.restaurantes.add(restaurante);
     }
 
     public void setFantasia(String fantasia) {

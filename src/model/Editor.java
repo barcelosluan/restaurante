@@ -8,9 +8,9 @@ public class Editor extends Empregado{
     public Editor() {
     }
 
-    public Editor(Integer codigo, String nome, Date data_contrato, String rg, Integer cod_empregado) {
+    public Editor(Integer codigo, String nome, Date data_contrato, String rg) {
         super(codigo, nome, data_contrato, rg);
-        this.codEmpregado = cod_empregado;
+        this.codEmpregado = codigo;
     }
 
     public Integer getCodEmpregado() {

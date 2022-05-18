@@ -7,16 +7,16 @@ import java.sql.SQLException;
 public class Connector {
 
     public Connection connectar(){
-        Connection conn = null;
         try{
             String url = "jdbc:postgresql://localhost:5432/postgres";
             String user = "postgres";
             String password = "daegon32";
-            conn = DriverManager.getConnection(url, user, password);
+            Connection conn = DriverManager.getConnection(url, user, password);
+            return conn;
         }catch (SQLException e){
             System.out.println(e.getMessage());
+            return null;
         }
-        return conn;
     }
 
 }

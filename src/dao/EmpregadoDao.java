@@ -3,28 +3,28 @@ package dao;
 import dao.connector.Connector;
 import model.Empregado;
 
-import java.net.http.HttpResponse;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class EmpregadoDao {
-    Connector conector;
+    Connector conector = new Connector();
 
     public void insertEmpregado(Empregado empregado){
-        String query = "insert into empregados (codigo, nome, data_contrato, rg) values (?,?,?,?);";
+        String query = "insert into empregados (codigo , nome , data_contrato , rg) values ( ? , ? , ? , ?);";
         try {
             Connection con = conector.connectar();
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(empregado.getCodigo()));
+            java.sql.Date dataSql = new java.sql.Date(empregado.getDataContrato().getTime());
+            ppst.setInt(1, empregado.getCodigo());
             ppst.setString(2, empregado.getNome());
-            ppst.setString(3, String.valueOf(empregado.getDataContrato()));
+            ppst.setDate(3, dataSql);
             ppst.setString(4, empregado.getRg());
 
             ppst.executeQuery();
@@ -37,7 +37,7 @@ public class EmpregadoDao {
 
     public List<Empregado> getEmpregados(){
         String query = "select * from empregados;";
-        ArrayList<Empregado> empregados = null;
+        ArrayList<Empregado> empregados = new ArrayList<>();
         try {
             Connection con = conector.connectar();
 
@@ -65,20 +65,22 @@ public class EmpregadoDao {
     public Empregado getEmpregadoByCod(Integer cod){
         String query = "select * from empregados e where e.codigo = ?;";
         try{
-            Connection con = conector.connectar();;
+            Connection con = conector.connectar();
 
             PreparedStatement ppst = con.prepareStatement(query);
-            ppst.setString(1, String.valueOf(cod));
+            ppst.setInt(1, cod);
 
             ResultSet rs = ppst.executeQuery();
-
-            Integer codigo = rs.getInt("codigo");
-            String nome = rs.getString("nome");
-            Date contrato = rs.getDate("data_contrato");
-            String rg = rs.getString("rg");
+            Empregado empregado = new Empregado();
+            if(rs.next()) {
+                empregado.setCodigo(rs.getInt(1));
+                empregado.setNome(rs.getString(2));
+                empregado.setDataContrato(rs.getDate(3));
+                empregado.setRg(rs.getString(4));
+            }
 
             con.close();
-            return new Empregado(codigo, nome, contrato,rg);
+            return empregado;
         }catch (Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -93,7 +95,7 @@ public class EmpregadoDao {
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(cod));
+            ppst.setInt(1, cod);
 
             ppst.executeQuery();
             con.close();
@@ -101,5 +103,28 @@ public class EmpregadoDao {
             System.out.println(e.getMessage());
         }
     }
+
+    public Empregado updateEmpregado(Empregado novEmpregado){
+        String query = "update empregados set nome = ?  where codigo = ?;";
+        try {
+            Connection con = conector.connectar();
+
+            PreparedStatement ppst = con.prepareStatement(query);
+
+            ppst.setString(1,novEmpregado.getNome());
+
+            ppst.setInt(2, novEmpregado.getCodigo());
+
+            ppst.executeQuery();
+
+            con.close();
+
+            return getEmpregadoByCod(novEmpregado.getCodigo());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
 
 }

@@ -12,15 +12,15 @@ import java.util.List;
 public class IngredienteDao {
     Connector connector;
 
-    public void insertIngrediente(Ingrediente Ingrediente){
+    public void insertIngrediente(Ingrediente ingrediente){
         String query = "insert into ingredientes (nome, descricao) values (?,?);";
         try {
             Connection con = connector.connectar();
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(Ingrediente.getNome()));
-            ppst.setString(2, Ingrediente.getDescricao());
+            ppst.setString(1, ingrediente.getNome());
+            ppst.setString(2, ingrediente.getDescricao());
 
             ppst.executeQuery();
 
@@ -62,7 +62,7 @@ public class IngredienteDao {
 
             PreparedStatement ppst = con.prepareStatement(query);
 
-            ppst.setString(1, String.valueOf(codigo));
+            ppst.setString(1, codigo);
 
             ResultSet rs = ppst.executeQuery();
 
@@ -77,7 +77,7 @@ public class IngredienteDao {
         }
     }
 
-    public Ingrediente updateCategria(String nome, String novDes){
+    public Ingrediente updateIngrediente(String nome, String novDes){
         String query = "update ingredientes set descricao = ? where nome = ?;";
         try {
             Connection con = connector.connectar();
