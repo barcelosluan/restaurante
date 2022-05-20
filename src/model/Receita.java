@@ -56,7 +56,12 @@ public class Receita {
         this.codCozinheiro = codCozinheiro;
         this.codCategoria = codCategoria;
     }
-
+    public Receita(Integer codigo, String nome, Integer codCozinheiro, Integer codCategoria) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.codCozinheiro = codCozinheiro;
+        this.codCategoria = codCategoria;
+    }
     public Receita() {
     }
 }

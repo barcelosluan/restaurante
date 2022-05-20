@@ -104,7 +104,7 @@ public class EmpregadoDao {
         }
     }
 
-    public Empregado updateEmpregado(Empregado novEmpregado){
+    public boolean updateEmpregado(Empregado novEmpregado){
         String query = "update empregados set nome = ?  where codigo = ?;";
         try {
             Connection con = conector.connectar();
@@ -119,10 +119,10 @@ public class EmpregadoDao {
 
             con.close();
 
-            return getEmpregadoByCod(novEmpregado.getCodigo());
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

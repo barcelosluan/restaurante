@@ -14,7 +14,7 @@ import java.util.List;
 public class ReceitaDao {
     Connector connector = new Connector();
 
-    public void insertReceita(Receita receita){
+    public boolean insertReceita(Receita receita){
         String query = "insert into receitas (codigo, nome, data_criacao, cozinheiro, categoria) values (?, ? , ? , ? , ?);";
         try {
             Connection con = connector.connectar();
@@ -30,8 +30,10 @@ public class ReceitaDao {
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -89,7 +91,7 @@ public class ReceitaDao {
         }
     }
 
-    public void deleteReceita(Integer cod){
+    public boolean deleteReceita(Integer cod){
         String query = "delete from receitas e where e.codigo = ?;";
         try {
             Connection con = connector.connectar();
@@ -100,12 +102,14 @@ public class ReceitaDao {
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
-    public Receita updateReceita(Receita novReceita){
+    public boolean updateReceita(Receita novReceita){
         String query = "update receitas set nome = ?  where codigo = ?;";
         try {
             Connection con = connector.connectar();
@@ -120,10 +124,10 @@ public class ReceitaDao {
 
             con.close();
 
-            return getReceitaByCod(novReceita.getCodigo());
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 

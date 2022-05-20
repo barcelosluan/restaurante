@@ -1,6 +1,5 @@
 package dao;
 
-import model.Degustador;
 import model.Editor;
 import model.Empregado;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class EditorDao extends EmpregadoDao{
 
-    public void insertEditor(Editor editor){
+    public boolean insertEditor(Editor editor){
         String query = "insert into degustadores (cod_empregado) values (?);";
         try {
             Connection con = conector.connectar();
@@ -24,8 +23,10 @@ public class EditorDao extends EmpregadoDao{
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -84,7 +85,7 @@ public class EditorDao extends EmpregadoDao{
 
     }
 
-    public void deleteEditor(Integer cod){
+    public boolean deleteEditor(Integer cod){
         String query = "delete from cozinheiros e where e.cod_empregado = ?;";
         try{
             Connection con = conector.connectar();
@@ -95,8 +96,11 @@ public class EditorDao extends EmpregadoDao{
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
+
     }
 }

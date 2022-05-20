@@ -12,7 +12,7 @@ import java.util.List;
 public class IngredienteDao {
     Connector connector;
 
-    public void insertIngrediente(Ingrediente ingrediente){
+    public boolean insertIngrediente(Ingrediente ingrediente){
         String query = "insert into ingredientes (nome, descricao) values (?,?);";
         try {
             Connection con = connector.connectar();
@@ -25,8 +25,10 @@ public class IngredienteDao {
             ppst.executeQuery();
 
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
 
     }

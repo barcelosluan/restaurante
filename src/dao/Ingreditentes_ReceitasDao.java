@@ -3,6 +3,7 @@ package dao;
 import dao.connector.Connector;
 import model.Cozinheiro;
 import model.Ingrediente;
+import model.Ingredientes_Receitas;
 import model.Receita;
 
 import java.sql.Connection;
@@ -11,27 +12,27 @@ import java.sql.PreparedStatement;
 public class Ingreditentes_ReceitasDao {
     Connector connector = new Connector();
 
-    public void insertIngrediente_Receita(Ingrediente ingrediente, Cozinheiro cozinheiro,
-                                          Receita receita, Double quantidade, String medida,
-                                          String descricao, Integer rendimento){
+    public boolean insertIngrediente_Receita(Ingredientes_Receitas ing){
         String query = "insert into ingredientes_receitas (receita, cozinheiro, ingrediente, quantidade, medida, descricao, rendimento)" +
                 "values (?,?,?,?,?,?,?);";
         try {
             Connection conn = connector.connectar();
             PreparedStatement ppst = conn.prepareStatement(query);
 
-            ppst.setInt(1, receita.getCodigo());
-            ppst.setInt(2,cozinheiro.getCodEmpregado());
-            ppst.setString(3, ingrediente.getDescricao());
-            ppst.setDouble(4, quantidade);
-            ppst.setString(5,medida);
-            ppst.setString(6,descricao);
-            ppst.setInt(7,rendimento);
+            ppst.setInt(1, Integer.parseInt(ing.getReceita()));
+            ppst.setInt(2,ing.getCodCozinheiro());
+            ppst.setInt(3, ing.getCodIngrediente());
+            ppst.setDouble(4, ing.getQuantidade());
+            ppst.setString(5,ing.getMedida());
+            ppst.setString(6,ing.getDescricao());
+            ppst.setInt(7,Integer.parseInt(ing.getRendimento()));
 
             ppst.executeQuery();
             conn.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 

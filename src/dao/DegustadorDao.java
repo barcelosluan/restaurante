@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DegustadorDao extends EmpregadoDao{
 
-    public void insereDegustador(Degustador degustador){
+    public boolean insereDegustador(Degustador degustador){
         String query = "insert into degustadores (cod_empregado) values ( ?)";
         try {
             Connection con = conector.connectar();
@@ -25,8 +25,10 @@ public class DegustadorDao extends EmpregadoDao{
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -84,7 +86,7 @@ public class DegustadorDao extends EmpregadoDao{
     }
 
 
-    public void deleteDegustador(Integer cod){
+    public boolean deleteDegustador(Integer cod){
         String query = "delete from degustadores e where e.cod_empregado = ?;";
         try{
             Connection con = conector.connectar();
@@ -95,8 +97,10 @@ public class DegustadorDao extends EmpregadoDao{
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 

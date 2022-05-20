@@ -13,7 +13,7 @@ import java.util.List;
 public class CozinheiroDao extends EmpregadoDao {
 
 
-    public void insereCozinheiro(Cozinheiro cozinheiro){
+    public boolean insereCozinheiro(Cozinheiro cozinheiro){
         String query = "insert into cozinheiros (cod_empregado , fantasia) values ( ?, ?)";
         try {
             Connection con = conector.connectar();
@@ -25,8 +25,10 @@ public class CozinheiroDao extends EmpregadoDao {
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
@@ -87,7 +89,7 @@ public class CozinheiroDao extends EmpregadoDao {
     }
 
 
-    public Cozinheiro updateCozinheiro(Cozinheiro cozinheiro){
+    public boolean updateCozinheiro(Cozinheiro cozinheiro){
         String query = "update cozinheiros set fantasia = ? where cod_empregado = ?;";
         try {
             Connection con = conector.connectar();
@@ -100,14 +102,14 @@ public class CozinheiroDao extends EmpregadoDao {
             ppst.executeQuery();
 
             con.close();
-            return getCozinheiroByCod(cozinheiro.getCodEmpregado());
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return null;
+            return false;
         }
     }
 
-    public void deleteCozinheiro(Integer cod){
+    public boolean deleteCozinheiro(Integer cod){
         String query = "delete from cozinheiros e where e.cod_empregado = ?;";
         try{
             Connection con = conector.connectar();
@@ -118,9 +120,12 @@ public class CozinheiroDao extends EmpregadoDao {
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
+
     }
 
 }

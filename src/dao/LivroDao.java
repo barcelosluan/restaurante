@@ -16,21 +16,21 @@ import java.util.List;
 public class LivroDao extends EditorDao {
     Connector connector = new Connector();
 
-    public void insertLivro(Livro livro, Editor editord){
+    public boolean insertLivro(Livro livro){
         String query = "insert into livros (titulo, isbn, editor) values (?,?,?);";
         try {
             Connection con = connector.connectar();
             PreparedStatement ppst = con.prepareStatement(query);
-
-            Editor editor = getEditorByCod(editord.getCodEmpregado());
             ppst.setString(1, livro.getTitulo());
             ppst.setString(2, livro.getIsbn());
-            ppst.setInt(3, editor.getCodEmpregado());
+            ppst.setInt(3, livro.getCodEditor());
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 

@@ -18,6 +18,12 @@ public class Degustador_Receita {
         this.nota = nota;
     }
 
+    public Degustador_Receita(Integer codDegustador, Integer codReceita, Double nota) {
+        this.codDegustador=codDegustador;
+        this.codReceita=codReceita;
+        this.nota=nota;
+    }
+
     public Integer getCodDegustador() {
         return codDegustador;
     }

@@ -9,10 +9,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class categoriaDao {
+public class CategoriaDao {
     Connector connector = new Connector();
 
-    public void insertCategoria(Categoria categoria){
+    public boolean insertCategoria(Categoria categoria){
         String query = "insert into categorias (codigo, descricao) values (?,?);";
         try {
             Connection con = connector.connectar();
@@ -25,8 +25,10 @@ public class categoriaDao {
             ppst.executeQuery();
 
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
 
     }

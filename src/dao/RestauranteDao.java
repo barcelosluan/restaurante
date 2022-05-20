@@ -15,7 +15,7 @@ import java.util.List;
 public class RestauranteDao {
     Connector con = new Connector();
 
-    public void insertRestaurante(Restaurante restaurante){
+    public boolean insertRestaurante(Restaurante restaurante){
         String query = "insert into restaurantes (codigo) values (?);";
         try {
             Connection conn = con.connectar();
@@ -23,8 +23,10 @@ public class RestauranteDao {
             ppst.setInt(1, restaurante.getCodigo());
             ppst.executeQuery();
             conn.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
