@@ -1,4 +1,4 @@
-package model;
+package object;
 
 import java.util.Date;
 
@@ -10,10 +10,6 @@ public class Degustador extends Empregado{
 
     public Degustador(Integer codigo, String nome, Date data_contrato, String rg) {
         super(codigo, nome, data_contrato, rg);
-    }
-
-    public Degustador(Integer codEmpregado) {
-        this.codEmpregado = codEmpregado;
     }
 
     public Integer getCodEmpregado() {

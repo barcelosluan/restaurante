@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class Principal extends JPanel {
 
-    private JButton btn_Livro;
+    private JButton btnLivro;
     public JPanel panelMain;
     private JButton receitasButton;
     private JButton ingredienteButton;
@@ -22,7 +22,7 @@ public class Principal extends JPanel {
 
 
     public Principal() {
-        btn_Livro.addActionListener(new ActionListener() {
+        btnLivro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Livro");

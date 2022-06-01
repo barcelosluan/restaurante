@@ -39,24 +39,38 @@ public class EmpregadoForm {
             public void actionPerformed(ActionEvent e) {
                 if (comboEmpregado.getSelectedItem().toString().equals("Cozinheiro")){
                     CozinheiroDao dao = new CozinheiroDao();
-                    if (dao.insereCozinheiro(new Cozinheiro(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText(),txtFantasia.getText()))){
-                        JOptionPane.showMessageDialog(panelMain, "Empregado Inserido");
-                    }else{
-                        JOptionPane.showMessageDialog(panelMain, "Erro na Inserção");
+                    EmpregadoDao empDao = new EmpregadoDao();
+
+                    if(empDao.insertEmpregado(new Empregado(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText()))){
+                        if (dao.insereCozinheiro(new Cozinheiro(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText(),txtFantasia.getText()))){
+                            JOptionPane.showMessageDialog(panelMain, "Empregado Inserido");
+                        }else{
+                            JOptionPane.showMessageDialog(panelMain, "Erro na Inserção");
+                        }
                     }
+
+
                 } else if (comboEmpregado.getSelectedItem().toString().equals("Editor")){
                     EditorDao dao = new EditorDao();
-                    if (dao.insertEditor(new Editor(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText()))){
-                        JOptionPane.showMessageDialog(panelMain, "Empregado Inserido");
-                    }else{
-                        JOptionPane.showMessageDialog(panelMain, "Erro na Inserção");
+                    EmpregadoDao empDao = new EmpregadoDao();
+                    if(empDao.insertEmpregado(new Empregado(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText()))){
+                        if (dao.insertEditor(new Editor(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText()))){
+                            JOptionPane.showMessageDialog(panelMain, "Empregado Inserido");
+                        }else{
+                            JOptionPane.showMessageDialog(panelMain, "Erro na Inserção");
+                        }
                     }
+
                 }else if (comboEmpregado.getSelectedItem().toString().equals("Degustador")){
                     DegustadorDao dao = new DegustadorDao();
-                    if (dao.insereDegustador(new Degustador(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText()))){
-                        JOptionPane.showMessageDialog(panelMain, "Empregado Inserido");
-                    }else{
-                        JOptionPane.showMessageDialog(panelMain, "Erro na Inserção");
+                    EmpregadoDao empDao = new EmpregadoDao();
+
+                    if(empDao.insertEmpregado(new Empregado(Integer.valueOf(txtEmpregado.getText()), txtNome.getText(), Date.valueOf(txtDate.getText()),txtRg.getText()))){
+                        if (dao.insereDegustador(new Degustador(Integer.valueOf(txtEmpregado.getText())))){
+                            JOptionPane.showMessageDialog(panelMain, "Empregado Inserido");
+                        }else{
+                            JOptionPane.showMessageDialog(panelMain, "Erro na Inserção");
+                        }
                     }
                 }
             }
