@@ -7,7 +7,7 @@
 
 --------------------------------
 
-CREATE SCHEMA public AUTHORIZATION restaurante;
+CREATE SCHEMA IF NOT EXISTS public AUTHORIZATION restaurante;
 
 CREATE TABLE public.categorias (
 	codigo int4 NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE public.receitas (
 	CONSTRAINT receitas_pk PRIMARY KEY (codigo),
 	CONSTRAINT receitas_un UNIQUE (nome, cozinheiro),
 	CONSTRAINT receitas_fk FOREIGN KEY (cozinheiro) REFERENCES public.cozinheiros(cod_empregado),
-	CONSTRAINT receitas_fk_1 FOREIGN KEY (codigo) REFERENCES public.categorias(codigo)
+	CONSTRAINT receitas_fk_1 FOREIGN KEY (categoria) REFERENCES public.categorias(codigo)
 );
 
 CREATE TABLE public.receitas_livros (
@@ -110,7 +110,7 @@ CREATE TABLE public.ingredientes_receitas (
 	medida varchar(100) NOT NULL,
 	descricao text NULL,
 	rendimento int4 NOT NULL,
-	CONSTRAINT ingredientes_receitas_pk PRIMARY KEY (receita, cozinheiro),
+	CONSTRAINT ingredientes_receitas_pk PRIMARY KEY (receita, cozinheiro, ingrediente),
 	CONSTRAINT ingredientes_receitas_fk FOREIGN KEY (receita) REFERENCES public.receitas(codigo),
 	CONSTRAINT ingredientes_receitas_fk_1 FOREIGN KEY (cozinheiro) REFERENCES public.cozinheiros(cod_empregado),
 	CONSTRAINT ingredientes_receitas_fk_2 FOREIGN KEY (ingrediente) REFERENCES public.ingredientes(nome)
