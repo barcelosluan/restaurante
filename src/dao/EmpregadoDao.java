@@ -14,7 +14,7 @@ import java.util.List;
 public class EmpregadoDao {
     Connector conector = new Connector();
 
-    public void insertEmpregado(Empregado empregado){
+    public boolean insertEmpregado(Empregado empregado){
         String query = "insert into empregados (codigo , nome , data_contrato , rg) values ( ? , ? , ? , ?);";
         try {
             Connection con = conector.connectar();
@@ -29,8 +29,10 @@ public class EmpregadoDao {
 
             ppst.executeQuery();
             con.close();
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
 

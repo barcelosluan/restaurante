@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngredienteDao {
-    Connector connector;
+    Connector connector = new Connector();
+
 
     public boolean insertIngrediente(Ingrediente ingrediente){
         String query = "insert into ingredientes (nome, descricao) values (?,?);";
