@@ -19,6 +19,10 @@ public class Principal extends JPanel {
     private JLabel lblRestaurante;
     private JButton degustarButton;
     private JButton categoriaButton;
+    private JButton btnListarReceitas;
+    private JLabel lblListaReceitas;
+    private JButton btnListaCozinheiros;
+    private JLabel lblListaCozinheiros;
 
 
     public Principal() {
@@ -87,6 +91,26 @@ public class Principal extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Categoria");
                 frame.setContentPane(new CategoriaForm().panelMain);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
+        btnListarReceitas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Receitas");
+                frame.setContentPane(new ListaReceitasForm().panelMain);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
+        btnListaCozinheiros.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Cozinheiros");
+                frame.setContentPane(new ListaCozinheirosForm().panelMain);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);

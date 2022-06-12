@@ -8,9 +8,9 @@ public class Connector {
 
     public Connection connectar(){
         try{
-            String url = "jdbc:postgresql://localhost:5432/postgres";
-            String user = "postgres";
-            String password = "daegon32";
+            String url = "jdbc:postgresql://localhost:5432/restaurante";
+            String user = "restaurante";
+            String password = "restaurante";
             Connection conn = DriverManager.getConnection(url, user, password);
             return conn;
         }catch (SQLException e){
