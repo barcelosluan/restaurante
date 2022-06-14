@@ -88,6 +88,35 @@ public class CozinheiroDao extends EmpregadoDao {
         }
     }
 
+    public List<Cozinheiro> getCozinheirosReceita(){
+        String query = "SELECT DISTINCT e.nome,\n" +
+                "       c.fantasia,\n" +
+                "       COUNT(r.codigo) AS qtd_receitas\n" +
+                "FROM receitas r\n" +
+                "INNER JOIN cozinheiros c ON r.cozinheiro = c.cod_empregado\n" +
+                "INNER JOIN empregados e ON c.cod_empregado = e.codigo\n" +
+                "WHERE date_part('year', r.data_criacao) = date_part('year', now())\n" +
+                "GROUP BY 1,2\n" +
+                "HAVING COUNT(r.codigo) >= 2;";
+        ArrayList<Cozinheiro> cozinheiros = new ArrayList<>();
+        try {
+            Connection con = conector.connectar();
+            PreparedStatement ppst = con.prepareStatement(query);
+            ResultSet rs = ppst.executeQuery();
+            while (rs.next()){
+                String nome = rs.getString("nome");
+                String fantasia = rs.getString("fantasia");
+                Integer quantidade = rs.getInt("qtd_receitas");
+
+                cozinheiros.add(new Cozinheiro(nome, fantasia, quantidade));
+            }
+            con.close();
+            return cozinheiros;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 
     public boolean updateCozinheiro(Cozinheiro cozinheiro){
         String query = "update cozinheiros set fantasia = ? where cod_empregado = ?;";

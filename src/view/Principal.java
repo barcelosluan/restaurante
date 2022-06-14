@@ -23,6 +23,7 @@ public class Principal extends JPanel {
     private JLabel lblListaReceitas;
     private JButton btnListaCozinheiros;
     private JLabel lblListaCozinheiros;
+    private JButton btnListaCategorias;
 
 
     public Principal() {
@@ -111,6 +112,16 @@ public class Principal extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Cozinheiros");
                 frame.setContentPane(new ListaCozinheirosForm().panelMain);
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
+        btnListaCategorias.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new JFrame("Categorias");
+                frame.setContentPane(new ListaCategoriasForm().panelMain);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);

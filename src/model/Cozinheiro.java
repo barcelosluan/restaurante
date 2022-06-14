@@ -7,6 +7,8 @@ public class Cozinheiro extends Empregado{
 
     private String fantasia;
 
+    private int qtd_receitas;
+
 
     public Cozinheiro() {
     }
@@ -17,10 +19,10 @@ public class Cozinheiro extends Empregado{
         this.fantasia=fantasia;
     }
 
-    public Cozinheiro(Integer codEmpregado, String fantasia) {
-        super();
-        this.codEmpregado=codEmpregado;
+    public Cozinheiro(String fantasia, String nome, int qtd_receitas) {
+        super(nome);
         this.fantasia=fantasia;
+        this.qtd_receitas=qtd_receitas;
     }
 
     public Integer getCodEmpregado() {
@@ -38,4 +40,8 @@ public class Cozinheiro extends Empregado{
     public void setFantasia(String fantasia) {
         this.fantasia = fantasia;
     }
+
+    public int getQtd_receitas() {return qtd_receitas;}
+
+    public void setQtd_receitas(int qtd_receitas) {this.qtd_receitas = qtd_receitas;}
 }

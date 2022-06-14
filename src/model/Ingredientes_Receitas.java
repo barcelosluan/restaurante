@@ -4,6 +4,8 @@ public class Ingredientes_Receitas {
     private String receita;
     private Integer codCozinheiro;
     private Integer codIngrediente;
+    private String cozinheiro;
+    private String ingrediente;
     private Double quantidade;
     private String medida;
     private String descricao;
@@ -17,6 +19,12 @@ public class Ingredientes_Receitas {
         this.medida = medida;
         this.descricao = descricao;
         this.rendimento = rendimento;
+    }
+
+    public Ingredientes_Receitas(String receita, String cozinheiro, String ingrediente) {
+        this.receita = receita;
+        this.cozinheiro = cozinheiro;
+        this.ingrediente = ingrediente;
     }
 
     public Ingredientes_Receitas() {
@@ -77,4 +85,11 @@ public class Ingredientes_Receitas {
     public void setRendimento(String rendimento) {
         this.rendimento = rendimento;
     }
+    public String getCozinheiro() {return cozinheiro;}
+
+    public void setCozinheiro(String cozinheiro) {this.cozinheiro = cozinheiro;}
+
+    public String getIngrediente() {return ingrediente;}
+
+    public void setIngrediente(String ingrediente) {this.ingrediente = ingrediente;}
 }

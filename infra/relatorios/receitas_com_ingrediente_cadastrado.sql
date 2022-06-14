@@ -2,7 +2,7 @@ SELECT --DISTINCT
     r.codigo AS cod_receita,
     r.nome AS nome_receita,
     r.data_criacao,
-    co.fantasia AS fantasia_cheff,
+    r.cozinheiro,
     e.nome AS nome_cheff,
     ca.descricao AS descricao_categoria
 FROM ingredientes_receitas ir

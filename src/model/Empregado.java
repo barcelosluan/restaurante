@@ -18,6 +18,10 @@ public class Empregado {
         this.rg = rg;
     }
 
+    public Empregado(String nome) {
+        this.nome = nome;
+    }
+
     public Integer getCodigo() {
         return codigo;
     }

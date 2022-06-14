@@ -26,12 +26,15 @@ public class ListaCozinheirosForm extends JFrame{
 
     private void criaJTable() {
         tabela = new JTable(modelo);
-        modelo.addColumn("Código");
+        modelo.addColumn("Fantasia");
         modelo.addColumn("Nome");
+        modelo.addColumn("Quantidade de Receitas");
         tabela.getColumnModel().getColumn(0)
                 .setPreferredWidth(10);
         tabela.getColumnModel().getColumn(1)
                 .setPreferredWidth(120);
+        tabela.getColumnModel().getColumn(0)
+                .setPreferredWidth(10);
         pesquisar(modelo);
     }
 
@@ -39,8 +42,8 @@ public class ListaCozinheirosForm extends JFrame{
         modelo.setNumRows(0);
         CozinheiroDao dao = new CozinheiroDao();
 
-        for (Cozinheiro c : dao.getCozinheiros()) {
-            modelo.addRow(new Object[]{c.getCodEmpregado(), c.getNome()});
+        for (Cozinheiro c : dao.getCozinheirosReceita()) {
+            modelo.addRow(new Object[]{c.getNome(), c.getNome(), c.getQtd_receitas()});
         }
     }
 }
