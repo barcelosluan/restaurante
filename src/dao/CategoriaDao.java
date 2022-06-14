@@ -35,7 +35,7 @@ public class CategoriaDao {
 
     public List<Categoria> getAllCategorias(){
         List<Categoria> categorias = new ArrayList<>();
-        String query = "select * from categorias;";
+        String query = "select * from categorias order by codigo;";
         try {
             Connection con = connector.connectar();
 

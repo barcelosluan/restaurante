@@ -65,6 +65,76 @@ public class ReceitaDao {
 
     }
 
+    public List<Receita> getReceitaCategoria(int cod_categoria) {
+        String query = "SELECT r.codigo,\n" +
+                "    r.nome as receita,\n" +
+                "    e.nome AS cozinheiro\n" +
+                "FROM receitas r\n" +
+                "INNER JOIN cozinheiros c ON r.cozinheiro = c.cod_empregado\n" +
+                "INNER JOIN empregados e ON c.cod_empregado = e.codigo\n" +
+                "WHERE r.categoria = ?";
+        ArrayList<Receita> receitas = new ArrayList<>();
+        try {
+            Connection con = connector.connectar();
+
+            PreparedStatement ppst = con.prepareStatement(query);
+            ppst.setInt(1, cod_categoria);
+            ResultSet rs = ppst.executeQuery();
+
+
+            while (rs.next()){
+                Integer codigo = rs.getInt("codigo");
+                String nome = rs.getString("receita");
+                String nome_cheff = rs.getString("cozinheiro");
+
+                receitas.add(new Receita(codigo,nome,nome_cheff));
+            }
+            con.close();
+            return receitas;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return  null;
+        }
+    }
+
+    public List<Receita> getReceitasIngredientes(){
+        String query = "SELECT --DISTINCT\n" +
+                "    r.codigo AS cod_receita,\n" +
+                "    r.nome AS nome_receita,\n" +
+                "    r.data_criacao,\n" +
+                "    e.nome AS nome_cheff,\n" +
+                "    ca.descricao AS descricao_categoria\n" +
+                "FROM ingredientes_receitas ir\n" +
+                "INNER JOIN receitas r ON ir.receita = r.codigo\n" +
+                "LEFT JOIN categorias ca ON r.categoria = ca.codigo\n" +
+                "LEFT JOIN cozinheiros co ON r.cozinheiro = co.cod_empregado\n" +
+                "INNER JOIN empregados e ON co.cod_empregado = e.codigo\n" +
+                "ORDER BY 1";
+        ArrayList<Receita> receitas = new ArrayList<>();
+        try {
+            Connection con = connector.connectar();
+
+            PreparedStatement ppst = con.prepareStatement(query);
+
+            ResultSet rs = ppst.executeQuery();
+
+            while (rs.next()){
+                Integer codigo = rs.getInt("cod_receita");
+                String nome = rs.getString("nome_receita");
+                Date contrato = rs.getDate("data_criacao");
+                String nome_cheff = rs.getString("nome_cheff");
+                String descricao_categoria = rs.getString("descricao_categoria");
+
+                receitas.add(new Receita(codigo,nome,contrato,nome_cheff,descricao_categoria));
+            }
+            con.close();
+            return receitas;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return  null;
+        }
+
+    }
     public Receita getReceitaByCod(Integer cod){
         String query = "select * from receitas e where e.codigo = ?;";
         try{

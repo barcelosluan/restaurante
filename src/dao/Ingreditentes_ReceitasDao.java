@@ -8,6 +8,9 @@ import model.Receita;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ingreditentes_ReceitasDao {
     Connector connector = new Connector();
@@ -33,6 +36,40 @@ public class Ingreditentes_ReceitasDao {
         }catch (Exception e){
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+
+    public List<Ingredientes_Receitas> getIngredientes(int cod_receita){
+        List<Ingredientes_Receitas> ingredientes = new ArrayList<>();
+        String query = "SELECT r.codigo AS receita,\n" +
+                "    i.nome AS ingrediente,\n" +
+                "    e.nome AS cozinheiro\n" +
+                "FROM ingredientes_receitas ir\n" +
+                "INNER JOIN ingredientes i ON ir.ingrediente = i.nome\n" +
+                "INNER JOIN receitas r ON ir.receita = r.codigo AND r.codigo = ?\n" +
+                "INNER JOIN cozinheiros c ON ir.cozinheiro = c.cod_empregado\n" +
+                "INNER JOIN empregados e ON c.cod_empregado = e.codigo\n" +
+                "WHERE ir.receita = ?;";
+        try {
+            Connection con = connector.connectar();
+
+            PreparedStatement ppst = con.prepareStatement(query);
+            ppst.setInt(1, cod_receita);
+            ppst.setInt(2, cod_receita);
+            ResultSet rs = ppst.executeQuery();
+
+            while(rs.next()){
+                String receita = String.valueOf(rs.getInt("receita"));
+                String ingrediente = rs.getString("ingrediente");
+                String cozinheiro = rs.getString("cozinheiro");
+
+                ingredientes.add(new Ingredientes_Receitas(receita, cozinheiro, ingrediente));
+            }
+            con.close();
+            return ingredientes;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
